@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal — ABC Websites</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0af;--blue2:#0066ff;--bg:#020a18;--bg2:#050f22;--bg3:#0a1a3a;--text:#e8f4ff;--muted:#4a7aaa;--border:rgba(0,170,255,0.2);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:17px;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,200,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,200,0.05) 1px,transparent 1px);background-size:50px 50px;z-index:0;pointer-events:none;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--blue2);}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(2,10,24,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;background:linear-gradient(90deg,#fff,#0af);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px;text-decoration:none;}
+.nav-back{color:var(--blue);text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;}
+.nav-back:hover{text-decoration:underline;}
+
+/* TABS */
+.tabs{display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:57px;z-index:99;}
+.tab{padding:16px 28px;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--blue);border-bottom:2px solid var(--blue);}
+
+/* CONTENT */
+.page{display:none;position:relative;z-index:1;max-width:860px;margin:0 auto;padding:60px 40px;}
+.page.active{display:block;}
+.page-header{margin-bottom:48px;}
+.page-tag{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--blue);letter-spacing:5px;display:block;margin-bottom:10px;}
+.page-title{font-family:'Orbitron',monospace;font-size:36px;font-weight:900;margin-bottom:12px;background:linear-gradient(180deg,#fff,#88ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-date{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--muted);}
+.intro-box{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--blue);padding:20px 24px;margin-bottom:40px;color:var(--muted);font-size:15px;line-height:1.7;}
+
+/* SECTIONS */
+.legal-section{margin-bottom:40px;}
+.legal-section h2{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--blue);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);letter-spacing:1px;}
+.legal-section p{color:#b0c8e0;font-size:16px;line-height:1.8;margin-bottom:12px;}
+.legal-section ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
+.legal-section ul li{color:#b0c8e0;font-size:15px;line-height:1.7;padding-left:20px;position:relative;}
+.legal-section ul li::before{content:'▸';color:var(--blue);position:absolute;left:0;font-size:11px;top:3px;}
+
+/* DISCORD RULES */
+.discord-header{display:flex;align-items:center;gap:16px;margin-bottom:32px;padding:24px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;}
+.discord-icon{font-size:48px;}
+.discord-server{font-family:'Orbitron',monospace;font-size:20px;font-weight:900;color:#fff;}
+.discord-sub{font-size:14px;color:var(--muted);margin-top:4px;}
+.rule-card{background:var(--bg3);border:1px solid var(--border);padding:24px 28px;margin-bottom:16px;display:flex;gap:20px;align-items:flex-start;transition:border-color 0.3s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
+.rule-card:hover{border-color:rgba(0,170,255,0.5);}
+.rule-num{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;color:var(--blue);flex-shrink:0;line-height:1;filter:drop-shadow(0 0 8px rgba(0,170,255,0.5));}
+.rule-body{}
+.rule-title{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:#fff;margin-bottom:8px;}
+.rule-desc{color:#b0c8e0;font-size:15px;line-height:1.6;}
+.rule-tag{display:inline-block;background:rgba(0,170,255,0.1);border:1px solid rgba(0,170,255,0.3);color:var(--blue);font-family:'Share Tech Mono',monospace;font-size:10px;padding:2px 8px;margin-top:8px;letter-spacing:2px;}
+.rule-tag.red{background:rgba(255,50,50,0.1);border-color:rgba(255,50,50,0.3);color:#ff6060;}
+.rule-tag.yellow{background:rgba(255,200,0,0.1);border-color:rgba(255,200,0,0.3);color:#ffd000;}
+.copy-box{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:32px;margin-top:48px;}
+.copy-box h3{font-family:'Orbitron',monospace;font-size:14px;color:var(--blue);margin-bottom:16px;letter-spacing:2px;}
+.copy-text{font-family:'Share Tech Mono',monospace;font-size:13px;color:#b0c8e0;line-height:2;white-space:pre-wrap;}
+.copy-btn{margin-top:16px;background:linear-gradient(135deg,var(--blue2),var(--blue));color:#fff;border:none;padding:10px 24px;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.3s;clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);}
+.copy-btn:hover{box-shadow:0 0 20px rgba(0,170,255,0.5);}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:30px 40px;background:var(--bg);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:60px;}
+.footer-logo{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;background:linear-gradient(90deg,#fff,#0af);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.footer-copy{color:var(--muted);font-size:12px;font-family:'Share Tech Mono',monospace;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ABC.WEBSITES</a>
+  <a href="index.html" class="nav-back">← Back to Site</a>
+</nav>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPage('terms')">Terms & Conditions</button>
+  <button class="tab" onclick="showPage('privacy')">Privacy Policy</button>
+  <button class="tab" onclick="showPage('refund')">Refund Policy</button>
+  <button class="tab" onclick="showPage('discord')">Discord Rules</button>
+</div>
+
+<!-- TERMS & CONDITIONS -->
+<div class="page active" id="terms">
+  <div class="page-header">
+    <span class="page-tag">// LEGAL</span>
+    <div class="page-title">Terms & Conditions</div>
+    <div class="page-date">Last updated: May 2025 — ABC Websites Ltd</div>
+  </div>
+  <div class="intro-box">By using our website or purchasing any of our services, you agree to be bound by these Terms & Conditions. Please read them carefully before proceeding.</div>
+
+  <div class="legal-section">
+    <h2>1. Agreement to Terms</h2>
+    <p>By accessing or using ABC Websites ("we", "our", "us"), you agree to be bound by these Terms & Conditions and all applicable laws and regulations. If you do not agree, you may not use our services.</p>
+  </div>
+  <div class="legal-section">
+    <h2>2. Our Services</h2>
+    <p>ABC Websites provides web design, web development, e-commerce solutions, SEO, maintenance, and AI integration services. We reserve the right to modify, suspend, or discontinue any service at any time.</p>
+    <ul>
+      <li>All services are subject to availability and acceptance of your project brief.</li>
+      <li>We reserve the right to refuse service to anyone for any reason.</li>
+      <li>Timelines provided are estimates and may vary based on project complexity and client responsiveness.</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>3. Client Responsibilities</h2>
+    <p>As a client, you agree to:</p>
+    <ul>
+      <li>Provide accurate and complete information required for your project.</li>
+      <li>Respond to communications within a reasonable timeframe (5 business days).</li>
+      <li>Ensure all content, images, and materials you supply do not infringe any third-party rights.</li>
+      <li>Make payments on time as agreed in your project invoice.</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>4. Intellectual Property</h2>
+    <p>Upon full payment, you own the final deliverables created specifically for your project. ABC Websites retains the right to display completed work in our portfolio unless you request otherwise in writing.</p>
+    <ul>
+      <li>Any third-party assets (fonts, stock images, plugins) remain subject to their own licences.</li>
+      <li>Our proprietary templates and frameworks remain the property of ABC Websites.</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>5. Payment Terms</h2>
+    <ul>
+      <li>A 50% deposit is required before work begins on custom projects.</li>
+      <li>The remaining balance is due upon project completion before final files are delivered.</li>
+      <li>Monthly subscription plans are billed in advance and are non-refundable once the billing cycle begins.</li>
+      <li>Overdue invoices may incur a late fee of 5% per month.</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>6. Limitation of Liability</h2>
+    <p>ABC Websites shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services, including but not limited to loss of revenue, data, or business opportunities.</p>
+  </div>
+  <div class="legal-section">
+    <h2>7. Governing Law</h2>
+    <p>These Terms & Conditions are governed by the laws of New Zealand. Any disputes shall be resolved in the courts of New Zealand.</p>
+  </div>
+  <div class="legal-section">
+    <h2>8. Changes to Terms</h2>
+    <p>We reserve the right to update these Terms at any time. Continued use of our services after changes constitutes acceptance of the new Terms.</p>
+  </div>
+  <div class="legal-section">
+    <h2>9. Contact</h2>
+    <p>For any questions regarding these Terms, contact us at <strong style="color:var(--blue)">abcwebsitesltd@gmail.com</strong></p>
+  </div>
+</div>
+
+<!-- PRIVACY POLICY -->
+<div class="page" id="privacy">
+  <div class="page-header">
+    <span class="page-tag">// LEGAL</span>
+    <div class="page-title">Privacy Policy</div>
+    <div class="page-date">Last updated: May 2025 — ABC Websites Ltd</div>
+  </div>
+  <div class="intro-box">ABC Websites is committed to protecting your privacy. This policy explains what information we collect, how we use it, and your rights regarding your personal data.</div>
+
+  <div class="legal-section">
+    <h2>1. Information We Collect</h2>
+    <p>We may collect the following information when you use our website or contact us:</p>
+    <ul>
+      <li>Your name and email address (via contact form)</li>
+      <li>Information about your project or business</li>
+      <li>Payment information (processed securely via third-party providers)</li>
+      <li>Usage data such as pages visited and time spent on site</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>2. How We Use Your Information</h2>
+    <ul>
+      <li>To respond to your enquiries and deliver our services</li>
+      <li>To process payments and send invoices</li>
+      <li>To improve our website and services</li>
+      <li>To send project updates and important communications</li>
+      <li>We will never sell your data to third parties</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>3. Cookies</h2>
+    <p>Our website may use cookies to improve your browsing experience. These are small files stored on your device. You can disable cookies in your browser settings, though this may affect site functionality.</p>
+  </div>
+  <div class="legal-section">
+    <h2>4. Third-Party Services</h2>
+    <p>We use trusted third-party services including:</p>
+    <ul>
+      <li><strong style="color:var(--text)">Formspree</strong> — for contact form submissions</li>
+      <li><strong style="color:var(--text)">GitHub Pages</strong> — for website hosting</li>
+      <li><strong style="color:var(--text)">Google Analytics</strong> — for anonymous usage statistics</li>
+    </ul>
+    <p>Each of these services has their own privacy policy governing data use.</p>
+  </div>
+  <div class="legal-section">
+    <h2>5. Data Retention</h2>
+    <p>We retain your personal data only as long as necessary to fulfil the purposes it was collected for, or as required by law. You may request deletion of your data at any time.</p>
+  </div>
+  <div class="legal-section">
+    <h2>6. Your Rights</h2>
+    <p>Under New Zealand's Privacy Act 2020, you have the right to:</p>
+    <ul>
+      <li>Access the personal information we hold about you</li>
+      <li>Request correction of inaccurate information</li>
+      <li>Request deletion of your information</li>
+      <li>Withdraw consent for marketing communications at any time</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>7. Contact</h2>
+    <p>For privacy-related enquiries, contact us at <strong style="color:var(--blue)">abcwebsitesltd@gmail.com</strong></p>
+  </div>
+</div>
+
+<!-- REFUND POLICY -->
+<div class="page" id="refund">
+  <div class="page-header">
+    <span class="page-tag">// LEGAL</span>
+    <div class="page-title">Refund Policy</div>
+    <div class="page-date">Last updated: May 2025 — ABC Websites Ltd</div>
+  </div>
+  <div class="intro-box">We want you to be completely satisfied with our work. Please read our refund policy carefully so you understand your rights and our obligations.</div>
+
+  <div class="legal-section">
+    <h2>1. Custom Web Projects</h2>
+    <ul>
+      <li>The 50% deposit is <strong style="color:#ff6060">non-refundable</strong> once work has commenced, as it covers time and resources already spent.</li>
+      <li>If you cancel before work begins, you are entitled to a full refund of any deposit paid.</li>
+      <li>If you are unsatisfied with the work, we will offer up to <strong style="color:var(--text)">3 rounds of revisions</strong> before considering a partial refund.</li>
+      <li>Refunds will not be issued for completed and delivered projects.</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>2. Monthly Subscription Plans</h2>
+    <ul>
+      <li>Subscriptions ($3, $5, $10, $50, $100/month) are billed monthly in advance.</li>
+      <li>You may cancel at any time — your plan remains active until the end of the current billing period.</li>
+      <li>No refunds are issued for partial months.</li>
+      <li>The Free plan can be cancelled at any time with no charge.</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>3. Exceptional Circumstances</h2>
+    <p>We understand that unexpected situations arise. If you believe you have exceptional circumstances that warrant a refund outside this policy, please contact us and we will review your case individually.</p>
+  </div>
+  <div class="legal-section">
+    <h2>4. How to Request a Refund</h2>
+    <ul>
+      <li>Email us at <strong style="color:var(--blue)">abcwebsitesltd@gmail.com</strong> with your name, project details, and reason for the refund request.</li>
+      <li>We will respond within 3 business days.</li>
+      <li>Approved refunds are processed within 5–10 business days.</li>
+    </ul>
+  </div>
+  <div class="legal-section">
+    <h2>5. Disputes</h2>
+    <p>If you are unhappy with the outcome of a refund request, you may contact the New Zealand Commerce Commission or seek independent legal advice.</p>
+  </div>
+</div>
+
+<!-- DISCORD RULES -->
+<div class="page" id="discord">
+  <div class="page-header">
+    <span class="page-tag">// COMMUNITY</span>
+    <div class="page-title">Discord Server Rules</div>
+    <div class="page-date">ABC Websites Official Discord — Est. 2025</div>
+  </div>
+
+  <div class="discord-header">
+    <div class="discord-icon">💬</div>
+    <div>
+      <div class="discord-server">ABC Websites — Official Server</div>
+      <div class="discord-sub">Welcome! Please read and follow these rules to keep our community awesome.</div>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">01</div>
+    <div class="rule-body">
+      <div class="rule-title">Be Respectful</div>
+      <div class="rule-desc">Treat everyone with respect. No harassment, hate speech, discrimination, bullying, or personal attacks of any kind. This includes all forms of communication — text, images, voice, and reactions.</div>
+      <span class="rule-tag red">INSTANT BAN</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">02</div>
+    <div class="rule-body">
+      <div class="rule-title">No Spam or Self-Promotion</div>
+      <div class="rule-desc">Do not spam messages, emojis, or mentions. No advertising your own products, services, or Discord servers without permission from an Admin. This includes DM advertising to members.</div>
+      <span class="rule-tag yellow">WARNING → BAN</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">03</div>
+    <div class="rule-body">
+      <div class="rule-title">Keep It In the Right Channel</div>
+      <div class="rule-desc">Post content in the correct channels. Web design talk goes in #design, support questions go in #support, general chat in #general. Off-topic posts will be removed.</div>
+      <span class="rule-tag">WARNING</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">04</div>
+    <div class="rule-body">
+      <div class="rule-title">No NSFW Content</div>
+      <div class="rule-desc">This is a professional community. No NSFW, explicit, or inappropriate content anywhere in the server. Violators will be banned immediately without warning.</div>
+      <span class="rule-tag red">INSTANT BAN</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">05</div>
+    <div class="rule-body">
+      <div class="rule-title">No Illegal Content or Activity</div>
+      <div class="rule-desc">Do not share, discuss, or promote anything illegal. This includes piracy, hacking tools, cracked software, or anything that violates Discord's Terms of Service.</div>
+      <span class="rule-tag red">INSTANT BAN</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">06</div>
+    <div class="rule-body">
+      <div class="rule-title">No Drama or Negativity</div>
+      <div class="rule-desc">Keep the vibes positive. If you have a dispute with another member, handle it privately or contact a moderator. Public arguments and drama will result in a mute or ban.</div>
+      <span class="rule-tag yellow">MUTE → BAN</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">07</div>
+    <div class="rule-body">
+      <div class="rule-title">Listen to Staff</div>
+      <div class="rule-desc">Moderators and Admins have the final say. If a staff member asks you to stop something, stop. Arguing with, disrespecting, or ignoring staff will result in a ban.</div>
+      <span class="rule-tag red">BAN</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">08</div>
+    <div class="rule-body">
+      <div class="rule-title">English Only in Main Channels</div>
+      <div class="rule-desc">Please use English in the main channels so everyone can participate. Other languages are welcome in #off-topic or DMs.</div>
+      <span class="rule-tag">WARNING</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">09</div>
+    <div class="rule-body">
+      <div class="rule-title">No Fake Information or Impersonation</div>
+      <div class="rule-desc">Do not impersonate other members, staff, or public figures. Do not spread misinformation about ABC Websites or our services.</div>
+      <span class="rule-tag red">INSTANT BAN</span>
+    </div>
+  </div>
+
+  <div class="rule-card">
+    <div class="rule-num">10</div>
+    <div class="rule-body">
+      <div class="rule-title">Have Fun & Help Each Other!</div>
+      <div class="rule-desc">This community exists to help each other grow. Share knowledge, ask questions, celebrate wins, and support fellow members. We're all here to build something great together! 🚀</div>
+      <span class="rule-tag">ENCOURAGED</span>
+    </div>
+  </div>
+
+  <!-- COPY-PASTE VERSION FOR DISCORD -->
+  <div class="copy-box">
+    <h3>📋 COPY & PASTE INTO DISCORD</h3>
+    <div class="copy-text" id="discordText">📋 **ABC WEBSITES — SERVER RULES**
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**01 — Be Respectful** 🤝
+Treat everyone with respect. No harassment, hate speech, or bullying. Violations = instant ban.
+
+**02 — No Spam or Self-Promotion** 🚫
+No spamming or advertising without Admin permission. Includes DM advertising.
+
+**03 — Right Channel Only** 📌
+Post in the correct channels. Off-topic posts will be deleted.
+
+**04 — No NSFW Content** 🔞
+No explicit or inappropriate content anywhere. Instant ban.
+
+**05 — No Illegal Activity** ⚠️
+No piracy, hacking tools, or anything against Discord TOS. Instant ban.
+
+**06 — No Drama** ☮️
+Keep it positive. Take disputes to DMs or contact a mod. Mute → Ban.
+
+**07 — Respect Staff** 👮
+Mods and Admins have final say. Arguing with staff = ban.
+
+**08 — English in Main Channels** 🌏
+Use English in main channels so everyone can join in.
+
+**09 — No Impersonation** 🎭
+Do not impersonate members, staff, or public figures. Instant ban.
+
+**10 — Have Fun & Help Each Other!** 🚀
+Share knowledge, celebrate wins, and support the community. We're all here to grow together!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*Breaking rules may result in a warning, mute, kick, or ban depending on severity.*
+*Questions? Contact an Admin — abcwebsitesltd@gmail.com*</div>
+    <button class="copy-btn" onclick="copyDiscord()">COPY TO CLIPBOARD</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">ABC.WEBSITES</div>
+  <div class="footer-copy">© 2025 ABC WEBSITES LTD — ALL RIGHTS RESERVED</div>
+</footer>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyDiscord(){
+  const text=document.getElementById('discordText').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('.copy-btn');
+    btn.textContent='✓ COPIED!';
+    btn.style.background='linear-gradient(135deg,#006600,#00aa00)';
+    setTimeout(()=>{btn.textContent='COPY TO CLIPBOARD';btn.style.background='';},2500);
+  });
+}
+</script>
+</body>
+</html>
